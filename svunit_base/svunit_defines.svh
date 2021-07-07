@@ -218,3 +218,11 @@ end \
                 wait( svunit_ut.is_running() ); \
         end \
     end
+
+/*
+ Macro: `SVUNIT_INIT_UT(ut_name)
+ This macro will initialize svunit_ut and name variables.
+*/
+`define SVUNIT_INIT_UT(_NAME_) \
+  parameter string name = `"_NAME_``_ut`"; \
+  svunit_pkg::svunit_testcase svunit_ut = new(name);
