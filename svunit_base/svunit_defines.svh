@@ -161,9 +161,9 @@
     svunit_pkg::current_tc = svunit_ut; \
     svunit_ut.add_junit_test_case(_testName); \
     svunit_ut.start(); \
-    setup(); \
     fork \
       begin \
+        setup(); \
         fork \
           begin
 
@@ -180,12 +180,12 @@
           end \
           `SVUNIT_FUSE \
         join_any \
+        teardown(); \
         #0; \
         disable fork; \
       end \
     join \
     svunit_ut.stop(); \
-    teardown(); \
     if (svunit_ut.get_error_count() == local_error_count) \
       `INFO($sformatf(`"%s::PASSED`", _testName)); \
     else \
